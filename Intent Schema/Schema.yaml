@@ -1,0 +1,62 @@
+version: 1.0
+# General info
+metadata:
+  user: "John Doe"
+  submissionId: 1
+  jobName: "SAMPLE_JOB_NAME"
+  # ACCEPTABLE SUBJECTS: physics, chemistry, biophysics, materials
+  subject: "SUBJECT"
+  timeStamp: "2026-06-01T19:15:57"
+
+# From my understanding the AI will be submitting these simulations to the Compute Cluster?
+slurmInfo:
+  CPUCount: 1
+  GPUCount: 0
+  RAM: "4GB"
+  time: "08:00"
+
+
+# The following fields will vary by subject. Each subject will have its own unique parameters.
+# I haven't filled in those parameters yet because I am still researching how each model works
+# What molecule, substance, etc
+experimentSubject:
+  empty: "nothing"
+
+#Chemistry Example
+experimentSubject1:
+  - subject: "crystal" # ACCEPTABLE SUBJECTS: crystal (for structures) or molecule (for molecules)
+    latticeVectors:
+      - [1.0, 0.0, 0.0]
+      - [0.0, 1.0, 0.0]
+    species: ["au", "fe"]
+    coordinateSystem: "cartesian" # ACCEPTABLE SYSTEMS: cartesian, fractional
+    coordinates:
+      - [0.0, 0.0, 0.0]
+      - [1.0, 1.0, 1.0]
+  - subject: "molecule" # Molecule has different formatting than lattice
+    species: ["au", "fe"]
+    coordinates:
+      - [0.0, 0.0, 0.0]
+      - [1.0, 1.0, 1.0]
+
+# What are we doing to the subject
+experimentTest:
+  empty: "nothing"
+
+# Chemistry Example
+experimentTest1:
+  calculationType: "relax" # ACCEPTABLE CALCULATIONS: relax, static, NonSCF, slab (this one is mvl instead of mp)
+  # We might want to add more calculation types later, but these are the major input set params
+
+  # OVERRIDES FOR INCAR
+  # If there are no overrides, the file should be null
+  ENCUT: 1
+  ISPIN: 1
+  ISMEAR: -1
+  
+
+
+
+
+
+
